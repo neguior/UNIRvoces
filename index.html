@@ -1,0 +1,46 @@
+---
+layout: default
+title: "Inicio"
+---
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page.title }}</title>
+</head>
+<body>
+    <!-- Encabezado con logo y título -->
+    <header style="text-align: center; padding: 20px;">
+        <img src="assets/images/LogoUNIR01.png" alt="Logo UNIR" width="120">
+        <h1 style="margin-top: 10px;">UNIR Voces</h1>
+        <p>Explora ideas, pensamientos y contenido interesante de nuestra comunidad. Este es un blog de la Fundación Universitaria Internacional de La Rioja (UNIR), creado por y para la comunidad universitaria. Un espacio donde estudiantes, profesores y egresados pueden compartir sus experiencias, ideas y conocimientos. Aquí encontrarás artículos sobre actualidad académica, investigaciones innovadoras, eventos y actividades de la universidad, además de historias inspiradoras que reflejan la vida en UNIR. Únete a nosotros y sé parte de esta vibrante comunidad que une nuestras voces y pensamientos.</p>
+    </header>
+
+    <!-- Navegación principal -->
+    <nav style="text-align: center; margin: 20px 0;">
+        <a href="about.html" style="margin: 0 15px;">Sobre Mí</a>
+        <a href="blog.html" style="margin: 0 15px;">Blog</a>
+    </nav>
+
+    <!-- Contenido principal: Últimas publicaciones -->
+    <main style="margin: 0 auto; max-width: 600px;">
+        <h2 style="text-align: center;">Últimas Publicaciones</h2>
+        <ul style="list-style-type: none; padding: 0;">
+            {% for post in site.posts %}
+                <li style="padding: 10px; border-bottom: 1px solid #ccc;">
+                    <a href="{{ post.url | relative_url }}" style="text-decoration: none; font-weight: bold;">
+                        {{ post.title }}
+                    </a>
+                    <p style="margin: 5px 0;">Publicado el {{ post.date | date: "%d %B %Y" }}</p>
+                </li>
+            {% endfor %}
+        </ul>
+    </main>
+
+    <!-- Pie de página -->
+    <footer style="text-align: center; padding: 20px; margin-top: 20px; font-size: 0.9em;">
+        <p>&copy; 2024 UNIR Voces. Todos los derechos reservados.</p>
+    </footer>
+</body>
+</html>
