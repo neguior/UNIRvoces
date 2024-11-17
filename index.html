@@ -1,180 +1,169 @@
----
-layout: default
-title: "Inicio"
----
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ejercicios de JavaScript y AJAX</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 20px; }
-        h2, h3 { color: #333; }
-        div { margin-bottom: 20px; }
-        .block { border: 1px solid #ccc; padding: 15px; border-radius: 5px; margin-top: 20px; }
-    </style>
-</head>
-<body>
-
-    <!-- Encabezado -->
-    <header>
-        <h1>FUNDACIÓN UNIVERSITARIA UNIR</h1>
-        <p><strong>Asignatura:</strong> Desarrollo de Aplicaciones en Red</p>
-        <p><strong>Autor:</strong> Nelson Enrique Guio Rojas</p>
-        <p id="currentDate"><strong>Fecha:</strong></p>
-    </header>
-
-    <!-- BLOQUE JSCRIPT -->
-    <div class="block">
-        <h2>BLOQUE JSCRIPT</h2>
-
-        <!-- 1. Detectar si la cadena de entrada es un palíndromo -->
-        <div>
-            <h3>1. Detectar si la cadena de entrada es un palíndromo</h3>
-            <input type="text" id="palindromeInput" placeholder="Introduce una cadena">
-            <button id="palindromeButton" onclick="checkPalindrome()" disabled>Verificar</button>
-            <p id="palindromeResult"></p>
-        </div>
-
-        <!-- 2. Determinar el mayor de dos números -->
-        <div>
-            <h3>2. Determinar el mayor de dos números</h3>
-            <input type="number" id="num1" placeholder="Número 1">
-            <input type="number" id="num2" placeholder="Número 2">
-            <button id="greaterButton" onclick="findGreater()" disabled>Comparar</button>
-            <p id="greaterResult"></p>
-        </div>
-
-        <!-- 3. Mostrar las vocales que aparecen en una frase -->
-        <div>
-            <h3>3. Mostrar las vocales que aparecen en una frase</h3>
-            <input type="text" id="vowelInput" placeholder="Introduce una frase">
-            <button id="vowelButton" onclick="showVowels()" disabled>Mostrar Vocales</button>
-            <p id="vowelResult"></p>
-        </div>
-
-        <!-- 4. Contar la frecuencia de cada vocal en una frase -->
-        <div>
-            <h3>4. Contar la frecuencia de cada vocal en una frase</h3>
-            <input type="text" id="countVowelInput" placeholder="Introduce una frase">
-            <button id="countVowelButton" onclick="countVowels()" disabled>Contar Vocales</button>
-            <p id="countVowelResult"></p>
-        </div>
-    </div>
-
-    <!-- BLOQUE AJAX -->
-    <div class="block">
-        <h2>BLOQUE AJAX</h2>
-
-        <!-- 1. Mostrar la URL actual al cargar la página -->
-        <div>
-            <h3>1. Mostrar la URL actual al cargar la página</h3>
-            <input type="text" id="urlInput" placeholder="URL actual">
-        </div>
-
-        <!-- 2. Mostrar Contenidos de la URL -->
-        <div>
-            <h3>2. Mostrar Contenidos de la URL</h3>
-            <button id="contentButton" onclick="loadContent()" disabled>Mostrar Contenidos</button>
-            <div id="contentResult" style="border: 1px solid #ddd; padding: 10px; margin-top: 10px;"></div>
-        </div>
-
-        <!-- 3. Estados de la Petición -->
-        <div>
-            <h3>3. Estados de la Petición</h3>
-            <p id="stateResult"></p>
-        </div>
-
-        <!-- 4. Cabeceras HTTP de la Respuesta -->
-        <div>
-            <h3>4. Cabeceras HTTP de la Respuesta</h3>
-            <p id="headersResult"></p>
-        </div>
-
-        <!-- 5. Código de Estado de la Respuesta -->
-        <div>
-            <h3>5. Código de Estado de la Respuesta</h3>
-            <p id="statusCodeResult"></p>
-        </div>
-    </div>
-
-    <!-- Script JavaScript -->
+    <title>Ejercicios JavaScript y AJAX</title>
     <script>
-        // Establecer la fecha y hora actual
-        function setCurrentDate() {
-            const now = new Date();
-            const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' };
-            const formattedDate = now.toLocaleDateString('es-ES', options);
-            document.getElementById("currentDate").innerHTML = `<strong>Fecha:</strong> ${formattedDate}`;
+        // Ejercicio 1: Detectar si la cadena es un palíndromo
+        function esPalindromo() {
+            let cadena = document.getElementById('cadena').value;
+            let resultado = cadena === cadena.split('').reverse().join('');
+            document.getElementById('resultadoPalindromo').innerText = 
+                resultado ? 'Es un palíndromo' : 'No es un palíndromo';
         }
 
-        // Llamar a la función para establecer la fecha al cargar la página
-        setCurrentDate();
-
-        // Activar botones al detectar cambios en los campos de texto
-        function toggleButton(inputId, buttonId) {
-            const input = document.getElementById(inputId);
-            const button = document.getElementById(buttonId);
-            button.disabled = input.value.trim() === "";
+        // Ejercicio 2: Determinar el número mayor
+        function numeroMayor() {
+            let num1 = parseInt(document.getElementById('num1').value);
+            let num2 = parseInt(document.getElementById('num2').value);
+            let resultado = num1 > num2 ? `El mayor es: ${num1}` : `El mayor es: ${num2}`;
+            document.getElementById('resultadoMayor').innerText = resultado;
         }
 
-        // Activar botón si ambos campos tienen valor
-        function checkBothFilled() {
-            const num1 = document.getElementById("num1").value.trim();
-            const num2 = document.getElementById("num2").value.trim();
-            const button = document.getElementById("greaterButton");
-            button.disabled = !(num1 && num2);
+        // Ejercicio 3: Escribir las vocales que aparecen
+        function mostrarVocales() {
+            let frase = document.getElementById('fraseVocales').value;
+            let vocales = frase.match(/[aeiouAEIOU]/g) || [];
+            document.getElementById('resultadoVocales').innerText = 'Vocales: ' + vocales.join(', ');
         }
 
-        // Funciones de los ejercicios
-        document.getElementById("palindromeInput").addEventListener("input", () => toggleButton("palindromeInput", "palindromeButton"));
-        document.getElementById("vowelInput").addEventListener("input", () => toggleButton("vowelInput", "vowelButton"));
-        document.getElementById("countVowelInput").addEventListener("input", () => toggleButton("countVowelInput", "countVowelButton"));
-        document.getElementById("num1").addEventListener("input", checkBothFilled);
-        document.getElementById("num2").addEventListener("input", checkBothFilled);
+        // Ejercicio 4: Contar cuántas veces aparecen cada una de las vocales
+        function contarVocales() {
+            let frase = document.getElementById('fraseContarVocales').value;
+            let vocales = ['a', 'e', 'i', 'o', 'u'];
+            let conteo = { a: 0, e: 0, i: 0, o: 0, u: 0 };
+            frase.toLowerCase().split('').forEach(letra => {
+                if (vocales.includes(letra)) {
+                    conteo[letra]++;
+                }
+            });
+            document.getElementById('resultadoContarVocales').innerText = 
+                `a: ${conteo.a}, e: ${conteo.e}, i: ${conteo.i}, o: ${conteo.o}, u: ${conteo.u}`;
+        }
 
-        // AJAX: Activar botón al escribir en URL
-        document.getElementById("urlInput").addEventListener("input", () => toggleButton("urlInput", "contentButton"));
+        // Función para cargar contenido con AJAX
+        function cargarContenido() {
+            let url = document.getElementById('url').value;  // Leer la URL ingresada por el usuario
+            let xhr = new XMLHttpRequest();
 
-        // AJAX: Mostrar contenido
-        function loadContent() {
-            const url = document.getElementById("urlInput").value;
-            const xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                let estado = xhr.readyState;
+                let estadoTexto = '';
+                switch (estado) {
+                    case 0:
+                        estadoTexto = 'No iniciada';
+                        break;
+                    case 1:
+                        estadoTexto = 'Cargando';
+                        break;
+                    case 2:
+                        estadoTexto = 'Cargada';
+                        break;
+                    case 3:
+                        estadoTexto = 'Interactuando';
+                        break;
+                    case 4:
+                        estadoTexto = 'Completada';
+                        break;
+                }
+                document.getElementById('estadoPeticion').innerText = estadoTexto;
 
-            xhr.onreadystatechange = function () {
-                const states = [
-                    "No iniciada",
-                    "Conexión establecida",
-                    "Recibiendo información",
-                    "Petición completada"
-                ];
-
-                document.getElementById("stateResult").textContent = `Estado: ${states[xhr.readyState] || "Desconocido"}`;
-
-                if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.readyState === 4) {
                     if (xhr.status === 200) {
-                        document.getElementById("contentResult").innerHTML = xhr.responseText;
-                        document.getElementById("statusCodeResult").textContent = `Código: ${xhr.status} - ${xhr.statusText}`;
-                        document.getElementById("headersResult").textContent = xhr.getAllResponseHeaders();
+                        document.getElementById('contenido').innerText = xhr.responseText;
+                        document.getElementById('cabeceras').innerText = xhr.getAllResponseHeaders();
+                        document.getElementById('codigoEstado').innerText = `Código: ${xhr.status} - ${xhr.statusText}`;
                     } else {
-                        document.getElementById("contentResult").textContent = "No se pudo cargar el contenido.";
-                        document.getElementById("statusCodeResult").textContent = `Código: ${xhr.status} - ${xhr.statusText}`;
-                        document.getElementById("headersResult").textContent = "Sin cabeceras disponibles.";
+                        document.getElementById('contenido').innerText = 'Error: ' + xhr.status + ' - ' + xhr.statusText;
                     }
                 }
             };
 
-            xhr.open("GET", url, true);
+            xhr.open('GET', url, true);
             xhr.send();
         }
-
-        // Mostrar la URL actual en el campo al cargar la página
-        window.onload = function () {
-            const currentURL = window.location.href;
-            document.getElementById("urlInput").value = currentURL;
-            document.getElementById("contentButton").disabled = false; // Activar botón por defecto
-        };
     </script>
+    <style>
+        .marco {
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            background-color: #f9f9f9;
+        }
+        .resultado {
+            background-color: #cce0ff;
+            padding: 10px;
+            border: 1px solid #b3c6ff;
+            border-radius: 5px;
+            color: #00509e;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Ejercicios JavaScript y AJAX</h1>
+
+    <!-- Ejercicio 1: Palíndromo -->
+    <div class="marco">
+        <h2>Ejercicio 1: Detectar si es un palíndromo</h2>
+        <label for="cadena">Introduce una cadena: </label>
+        <input type="text" id="cadena">
+        <button onclick="esPalindromo()">Comprobar</button>
+        <p id="resultadoPalindromo" class="resultado"></p>
+    </div>
+
+    <!-- Ejercicio 2: Número Mayor -->
+    <div class="marco">
+        <h2>Ejercicio 2: Número mayor</h2>
+        <label for="num1">Número 1: </label>
+        <input type="number" id="num1">
+        <label for="num2">Número 2: </label>
+        <input type="number" id="num2">
+        <button onclick="numeroMayor()">Comparar</button>
+        <p id="resultadoMayor" class="resultado"></p>
+    </div>
+
+    <!-- Ejercicio 3: Vocales que aparecen -->
+    <div class="marco">
+        <h2>Ejercicio 3: Vocales que aparecen</h2>
+        <label for="fraseVocales">Introduce una frase: </label>
+        <input type="text" id="fraseVocales">
+        <button onclick="mostrarVocales()">Mostrar Vocales</button>
+        <p id="resultadoVocales" class="resultado"></p>
+    </div>
+
+    <!-- Ejercicio 4: Contar las vocales -->
+    <div class="marco">
+        <h2>Ejercicio 4: Contar cuántas veces aparecen las vocales</h2>
+        <label for="fraseContarVocales">Introduce una frase: </label>
+        <input type="text" id="fraseContarVocales">
+        <button onclick="contarVocales()">Contar Vocales</button>
+        <p id="resultadoContarVocales" class="resultado"></p>
+    </div>
+
+    <!-- Ejercicio AJAX -->
+    <div class="marco">
+        <h2>Ejercicio AJAX</h2>
+
+        <label for="url">Introduce una URL para obtener contenido:</label>
+        <input type="text" id="url" value="https://jsonplaceholder.typicode.com/posts" />
+        <button onclick="cargarContenido()">Mostrar Contenidos</button>
+
+        <h3>Contenido de la página</h3>
+        <div id="contenido" style="margin-top: 10px; padding: 10px; border: 1px solid #ddd; background-color: #f9f9f9;"></div>
+
+        <h3>Estados de la petición</h3>
+        <p id="estadoPeticion" style="color: #ff9800; font-weight: bold;">No iniciada</p>
+
+        <h3>Cabeceras HTTP</h3>
+        <pre id="cabeceras" style="background-color: #f9f9f9; padding: 10px; border: 1px solid #ddd;"></pre>
+
+        <h3>Código de estado</h3>
+        <pre id="codigoEstado" style="background-color: #f9f9f9; padding: 10px; border: 1px solid #ddd;"></pre>
+    </div>
+
 </body>
 </html>
