@@ -100,9 +100,24 @@
             color: #00509e;
             margin-top: 10px;
         }
+        .cabecera {
+            padding: 10px;
+            border: 1px solid #ddd;
+            background-color: #f1f1f1;
+            text-align: center;
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 <body>
+
+    <!-- Cabecera -->
+    <div class="cabecera">
+        <h2>Nombre: Nelson Enrique Guio Rojas</h2>
+        <h3>Asignatura: Desarrollo de Aplicaciones en Red</h3>
+        <h3>Fecha: <span id="fechaActual"></span></h3>
+        <h4>FUNDACIÓN UNIVERSITARIA INTERNACIONAL DE LA RIOJA - UNIR</h4>
+    </div>
 
     <h1>Ejercicios JavaScript y AJAX</h1>
 
@@ -164,6 +179,11 @@
         <h3>Código de estado</h3>
         <pre id="codigoEstado" style="background-color: #f9f9f9; padding: 10px; border: 1px solid #ddd;"></pre>
     </div>
+
+    <script>
+        // Mostrar la fecha y hora actual en la cabecera
+        document.getElementById('fechaActual').innerText = new Date().toLocaleString();
+    </script>
 
 </body>
 </html>
